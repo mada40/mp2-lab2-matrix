@@ -224,19 +224,36 @@ public:
 			pMem[i] = TDynamicVector<T>(sz);
 	}
 
-	TDynamicMatrix(TDynamicVector<TDynamicVector<T>> m) : TDynamicVector<TDynamicVector<T>>(m)
-	{
-	}
 
 	using TDynamicVector<TDynamicVector<T>>::operator[];
 
 	size_t size() const noexcept { return sz; }
 
+	const T& at(size_t row, size_t col) const 
+	{
+		if (row < 0 || row >= sz || col < 0 || col >= sz)
+			throw out_of_range("index should be greater than zero and less size matrix");
+
+		return pMem[row][col];
+	}
+
+	T& at(size_t row, size_t col) 
+	{
+		if (row < 0 || row >= sz || col < 0 || col >= sz)
+			throw out_of_range("index should be greater than zero and less size matrix");
+
+		return pMem[row][col];
+	}
+
 	// сравнение
 	bool operator==(const TDynamicMatrix& m) const noexcept
 	{
-		return true;
-		//return TDynamicMatrix<TDynamicMatrix<T>>::operator==(TDynamicMatrix(m));
+		return TDynamicVector<TDynamicVector<T>>::operator==(m);
+	}
+
+	bool operator!=(const TDynamicMatrix& m) const noexcept
+	{
+		return TDynamicVector<TDynamicVector<T>>::operator!=(m);
 	}
 
 
@@ -244,25 +261,69 @@ public:
 	// матрично-скалярные операции
 	TDynamicVector<T> operator*(const T& val)
 	{
-		TDynamicMatrix<TDynamicMatrix<T>>::operator*(val);
+		return TDynamicVector<TDynamicVector<T>>::operator*(val);
 	}
 
 	// матрично-векторные операции
 	TDynamicVector<T> operator*(const TDynamicVector<T>& v)
 	{
-		
+		if (sz != v.sz)
+			throw length_error("the lengths of the vectors should be equal");
+
+		TDynamicVector<T> res(sz);
+		for (size_t i = 0; i < sz; i++)
+		{
+			res[i] = pMem[i] * v[i];
+		}
+		return res;
 	}
 
 	// матрично-матричные операции
 	TDynamicMatrix operator+(const TDynamicMatrix& m)
 	{
-		TDynamicMatrix<TDynamicMatrix<T>>::operator+(m);
+		if (sz != m.sz)
+			throw length_error("the lengths of the vectors should be equal");
+
+		TDynamicMatrix<T> res(sz);
+		for (size_t i = 0; i < sz; i++)
+		{
+			res[i] = pMem[i] + m[i];
+		}
+		return res;
+
 	}
 	TDynamicMatrix operator-(const TDynamicMatrix& m)
 	{
+		if (sz != m.sz)
+			throw length_error("the lengths of the vectors should be equal");
+
+		TDynamicMatrix<T> res(sz);
+		for (size_t i = 0; i < sz; i++)
+		{
+			res[i] = pMem[i] - m[i];
+		}
+		return res;
 	}
 	TDynamicMatrix operator*(const TDynamicMatrix& m)
 	{
+		if (sz != m.sz)
+			throw length_error("the lengths of the vectors should be equal");
+
+		TDynamicMatrix<T> res(sz);
+		for (size_t i = 0; i < length; i++)
+		{
+			for (size_t j = 0; j < length; j++)
+			{
+				for (size_t k = 0; k < length; k++)
+				{
+					res[i][j] += pMem[i][k] * m[k][j];
+				}
+			}
+		}
+
+		return res;
+
+		return res;
 	}
 
 	// ввод/вывод
