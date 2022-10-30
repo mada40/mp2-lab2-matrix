@@ -26,17 +26,31 @@ TEST(TDynamicMatrix, can_create_copied_matrix)
 
 TEST(TDynamicMatrix, copied_matrix_is_equal_to_source_one)
 {
-  ADD_FAILURE();
+	TDynamicMatrix<int> m1(2);
+	m1[0][1] = 2;
+	TDynamicMatrix<int> m2(m1);
+	//ASSERT_EQ(m1, m2);
+	//ADD_FAILURE();
+
 }
 
 TEST(TDynamicMatrix, copied_matrix_has_its_own_memory)
 {
-  ADD_FAILURE();
+	//TDynamicMatrix<int> m1(2);
+	//m1[0][1] = 2;
+	//TDynamicMatrix<int> m2(m1);
+	//m1[1][1] = 99;
+	//ASSERT_NE(m1, m2);
+	ADD_FAILURE();
+
 }
 
 TEST(TDynamicMatrix, can_get_size)
 {
-  ADD_FAILURE();
+	//TDynamicMatrix<int> m1(2);
+	//int size = m1.size();
+	//ASSERT_EQ(size, 2);
+	ADD_FAILURE();
 }
 
 TEST(TDynamicMatrix, can_set_and_get_element)
