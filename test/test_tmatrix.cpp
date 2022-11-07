@@ -4,24 +4,24 @@
 
 TEST(TDynamicMatrix, can_create_matrix_with_positive_length)
 {
-	EXPECT_NO_THROW(TDynamicMatrix<int> m(5));
+	ASSERT_NO_THROW(TDynamicMatrix<int> m(5));
 }
 
 TEST(TDynamicMatrix, cant_create_too_large_matrix)
 {
-	EXPECT_ANY_THROW(TDynamicMatrix<int> m(MAX_MATRIX_SIZE + 1));
+	ASSERT_ANY_THROW(TDynamicMatrix<int> m(MAX_MATRIX_SIZE + 1));
 }
 
 TEST(TDynamicMatrix, throws_when_create_matrix_with_negative_length)
 {
-	EXPECT_ANY_THROW(TDynamicMatrix<int> m(-5));
+	ASSERT_ANY_THROW(TDynamicMatrix<int> m(-5));
 }
 
 TEST(TDynamicMatrix, can_create_copied_matrix)
 {
   TDynamicMatrix<int> m(5);
 
-  EXPECT_NO_THROW(TDynamicMatrix<int> m1(m));
+  ASSERT_NO_THROW(TDynamicMatrix<int> m1(m));
 }
 
 TEST(TDynamicMatrix, copied_matrix_is_equal_to_source_one)
@@ -59,21 +59,21 @@ TEST(TDynamicMatrix, can_set_and_get_element)
 TEST(TDynamicMatrix, throws_when_set_element_with_negative_index)
 {
 	TDynamicMatrix<int> m1(2);
-	EXPECT_ANY_THROW(m1.at(-1, 0));
-	EXPECT_ANY_THROW(m1.at(0, -1));
+	ASSERT_ANY_THROW(m1.at(-1, 0));
+	ASSERT_ANY_THROW(m1.at(0, -1));
 }
 
 TEST(TDynamicMatrix, throws_when_set_element_with_too_large_index)
 {
 	TDynamicMatrix<int> m1(2);
-	EXPECT_ANY_THROW(m1.at(3, 0));
-	EXPECT_ANY_THROW(m1.at(0, 3));
+	ASSERT_ANY_THROW(m1.at(3, 0));
+	ASSERT_ANY_THROW(m1.at(0, 3));
 }
 
 TEST(TDynamicMatrix, can_assign_matrix_to_itself)
 {
 	TDynamicMatrix<int> m(4);
-	EXPECT_NO_THROW(m = m);
+	ASSERT_NO_THROW(m = m);
 
 }
 
@@ -138,7 +138,7 @@ TEST(TDynamicMatrix, can_add_matrices_with_equal_size)
 TEST(TDynamicMatrix, cant_add_matrices_with_not_equal_size)
 {
 	TDynamicMatrix<int> m1(2), m2(3);
-	EXPECT_ANY_THROW(m1 + m2);
+	ASSERT_ANY_THROW(m1 + m2);
 }
 
 TEST(TDynamicMatrix, can_subtract_matrices_with_equal_size)
@@ -157,7 +157,7 @@ TEST(TDynamicMatrix, can_subtract_matrices_with_equal_size)
 TEST(TDynamicMatrix, cant_subtract_matrixes_with_not_equal_size)
 {
 	TDynamicMatrix<int> m1(2), m2(3);
-	EXPECT_ANY_THROW(m1 - m2);
+	ASSERT_ANY_THROW(m1 - m2);
 }
 
 TEST(TDynamicMatrix, can_multiply_matrices_with_equal_size)
