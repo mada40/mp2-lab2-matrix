@@ -310,11 +310,11 @@ public:
 			throw length_error("the lengths of the vectors should be equal");
 
 		TDynamicMatrix<T> res(sz);
-		for (size_t i = 0; i < length; i++)
+		for (size_t i = 0; i < sz; i++)
 		{
-			for (size_t j = 0; j < length; j++)
+			for (size_t j = 0; j < sz; j++)
 			{
-				for (size_t k = 0; k < length; k++)
+				for (size_t k = 0; k < sz; k++)
 				{
 					res[i][j] += pMem[i][k] * m[k][j];
 				}
@@ -323,7 +323,6 @@ public:
 
 		return res;
 
-		return res;
 	}
 
 	// ввод/вывод
