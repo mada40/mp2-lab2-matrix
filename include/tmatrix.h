@@ -326,12 +326,16 @@ public:
 	}
 
 	// ввод/вывод
-	friend istream& operator>>(istream& istr, TDynamicMatrix& v)
+	friend istream& operator>>(istream& istr, TDynamicMatrix& m)
 	{
+		for (size_t i = 0; i < m.sz; i++)
+			istr >> m.pMem[i]; // требуется оператор>> для типа T
 		return istr;
 	}
-	friend ostream& operator<<(ostream& ostr, const TDynamicMatrix& v)
+	friend ostream& operator<<(ostream& ostr, const TDynamicMatrix& m)
 	{
+		for (size_t i = 0; i < m.sz; i++)
+			ostr << m.pMem[i] << '\n'; // требуется оператор<< для типа T
 		return ostr;
 	}
 };
