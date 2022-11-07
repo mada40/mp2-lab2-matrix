@@ -127,7 +127,7 @@ public:
 		}
 		return tmp;
 	}
-	TDynamicVector operator-(double val)
+	TDynamicVector operator-(T val)
 	{
 		TDynamicVector tmp(sz);
 		for (size_t i = 0; i < sz; i++)
@@ -136,7 +136,7 @@ public:
 		}
 		return tmp;
 	}
-	TDynamicVector operator*(double val)
+	TDynamicVector operator*(T val)
 	{
 		TDynamicVector tmp(sz);
 		for (size_t i = 0; i < sz; i++)
@@ -169,7 +169,7 @@ public:
 		}
 		return tmp;
 	}
-	T operator*(const TDynamicVector& v) noexcept(noexcept(T()))
+	T operator*(const TDynamicVector& v)
 	{
 		if (sz != v.sz)
 			throw length_error("the lengths of the vectors should be equal");
